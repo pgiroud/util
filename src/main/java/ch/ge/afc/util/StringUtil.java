@@ -16,6 +16,7 @@
 package ch.ge.afc.util;
 
 import java.text.DecimalFormat;
+import java.util.Set;
 
 public class StringUtil {
 
@@ -27,6 +28,10 @@ public class StringUtil {
 
 	public static final String POUR_MILLE = "\u2030";
 
+	private static boolean isNonBreakingSpace(char caractere) {
+		return '\u00A0' == caractere || '\u2007' == caractere || '\u202F' == caractere;
+	}
+	
 	/**
 	 * Vérifie que la chaîne de caractère passée en paramètre contient du texte.
 	 * Elle retourne <code>true</code> si la chaîne n'est pas <code>null<code>,
@@ -53,7 +58,8 @@ public class StringUtil {
 		if (insStr == null || (strLen = insStr.length()) == 0)
 			return false;
 		for (int i = 0; i < strLen; i++) {
-			if (!Character.isWhitespace(insStr.charAt(i)))
+			char caractere = insStr.charAt(i);
+			if (!Character.isWhitespace(caractere) && !isNonBreakingSpace(caractere))
 				return true;
 		}
 		return false;
