@@ -11,6 +11,11 @@ import static org.junit.Assert.*;
 public class TypeArrondiTest {
 
 	@Test
+	public void arrondirNull() {
+		assertNull("Arrondi d'un null",TypeArrondi.CINQ_CTS.arrondirMontant(null));
+	}
+	
+	@Test
     public void arrondiCinqCentimes() {
         // Arrondi de 0 au 5 centimes le plus proche
         testArrondi(TypeArrondi.CINQ_CTS,"0","0.00");

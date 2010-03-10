@@ -33,30 +33,30 @@ public enum TypeArrondi {
      * Arrondi au centime inférieur. Par exemple, 2.288 sera
      * arrondi à 2.28
      */
-    CT_INF (BigDecimalUtil.UN_CENTIME,RoundingMode.DOWN),
+    CT_INF (BigDecimalUtil.UN_CENTIME,RoundingMode.DOWN,2),
 
     /**
      * Arrondi au centime le plus proche.
      */
-    CT(BigDecimalUtil.UN_CENTIME,RoundingMode.HALF_UP),
+    CT(BigDecimalUtil.UN_CENTIME,RoundingMode.HALF_UP,2),
     
     /**
      * Arrondi au centime supérieur.
      */
-    CT_SUP (BigDecimalUtil.UN_CENTIME,RoundingMode.UP),
+    CT_SUP (BigDecimalUtil.UN_CENTIME,RoundingMode.UP,2),
     
     /**
      * Arrondi aux cinq centimes inférieur. Par exemple, 2.28 sera
      * arrondi à 2.25
      */
-    CINQ_CTS_INF (BigDecimalUtil.CINQ_CTS,RoundingMode.DOWN),
+    CINQ_CTS_INF (BigDecimalUtil.CINQ_CTS,RoundingMode.DOWN,2),
 
 
     /**
      * Arrondi aux cinq centimes supérieurs. Par exemple, 2.28 sera arrondi
      * à 2.30
      */
-    CINQ_CTS_SUP (BigDecimalUtil.CINQ_CTS,RoundingMode.UP),
+    CINQ_CTS_SUP (BigDecimalUtil.CINQ_CTS,RoundingMode.UP,2),
 
 
     /**
@@ -67,25 +67,25 @@ public enum TypeArrondi {
      *  <li>2.275 sera arrondi à 2.30</li>
      * </ul>
      */
-    CINQ_CTS (BigDecimalUtil.CINQ_CTS,RoundingMode.HALF_UP),
+    CINQ_CTS (BigDecimalUtil.CINQ_CTS,RoundingMode.HALF_UP,2),
 
 
     /**
      * Arrondi aux dix centimes inférieur
      */
-    DIX_CTS_INF (BigDecimalUtil.DIX_CTS,RoundingMode.DOWN),
+    DIX_CTS_INF (BigDecimalUtil.DIX_CTS,RoundingMode.DOWN,2),
 
 
     /**
      * Arrondi aux dix centimes supérieurs
      */
-    DIX_CTS_SUP (BigDecimalUtil.DIX_CTS,RoundingMode.UP),
+    DIX_CTS_SUP (BigDecimalUtil.DIX_CTS,RoundingMode.UP,2),
 
 
     /**
      * Arrondi aux dix centimes les plus proches.
      */
-    DIX_CTS (BigDecimalUtil.DIX_CTS,RoundingMode.HALF_UP),
+    DIX_CTS (BigDecimalUtil.DIX_CTS,RoundingMode.HALF_UP,2),
 
 
     /**
@@ -164,6 +164,7 @@ public enum TypeArrondi {
 
     private final BigDecimal moPrecision;
     private final RoundingMode moMode;
+	private final int scale;
 
     /**************************************************/
     /**************** Constructeurs *******************/
@@ -178,6 +179,21 @@ public enum TypeArrondi {
     TypeArrondi(BigDecimal inoPrecision, RoundingMode inoMode) {
         moPrecision = inoPrecision;
         moMode = inoMode;
+        scale = 0;
+    }
+
+    /**
+     * Construction d'un type d'arrondi en fournissant une précision, par exemple 0.05 pour un arrondi
+     * aux cinq centimes, et un mode d'arrondi (arrondi au plus près, à la valeur supérieure ou inférieure)
+     * @param inoPrecision la précision : 0.05 pour un arrondi aux cinq centimes par exemple
+     * @param inoMode le mode d'arrondi i.e. au plus près, à la valeur supérieure ou inférieure
+     * @param nbChiffreApresVirgule le nombre de chiffre après la virgule du résultat. Par exemple, pour un 
+     * arrondi à 10 cts près, on voudra 2 chiffres après la virgule
+     */
+    TypeArrondi(BigDecimal inoPrecision, RoundingMode inoMode, int nbChiffreApresVirgule) {
+        moPrecision = inoPrecision;
+        moMode = inoMode;
+        scale = nbChiffreApresVirgule;
     }
 
     /**************************************************/
@@ -195,7 +211,7 @@ public enum TypeArrondi {
     public BigDecimal arrondirMontant(BigDecimal inoMontantAArrondir) {
       if (null == inoMontantAArrondir) return null;  
       BigDecimal normalise = inoMontantAArrondir.divide(moPrecision, 10, moMode);
-      return normalise.setScale(0, moMode).multiply(moPrecision).setScale(2);
+      return normalise.setScale(0, moMode).multiply(moPrecision).setScale(scale);
     }
 
 }
