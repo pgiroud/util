@@ -63,28 +63,28 @@ public class HashCodeBuilder {
 	}
 	
 
-	public HashCodeBuilder add(boolean value) {
+	public final HashCodeBuilder add(boolean value) {
 		return increment(value ? 1 : 0);
 	}
 	
-	public HashCodeBuilder add(char value) {
+	public final HashCodeBuilder add(char value) {
 		return increment((int)value);
 	}
 	
-	public HashCodeBuilder add(int value) {
+	public final HashCodeBuilder add(int value) {
 		// Les valeurs de type byte, short sont traitées par cette méthode
 		return increment(value);
 	}
 
-	public HashCodeBuilder add(long value) {
+	public final HashCodeBuilder add(long value) {
 		return increment((int)(value ^ (value >>> 32)));
 	}
 
-	public HashCodeBuilder add(float value) {
+	public final HashCodeBuilder add(float value) {
 		return increment(Float.floatToIntBits(value));
 	}
 	
-	public HashCodeBuilder add(double value) {
+	public final HashCodeBuilder add(double value) {
 		return add(Double.doubleToLongBits(value));
 	}
 	
@@ -92,7 +92,7 @@ public class HashCodeBuilder {
 		return value.getClass().isArray();
 	}
 	
-	public HashCodeBuilder add(Object value) {
+	public final HashCodeBuilder add(Object value) {
 		if (null == value) {
 			return add(0);
 		} else {
@@ -109,7 +109,7 @@ public class HashCodeBuilder {
 		}
 	}
 	
-	public int hash() {
+	public final int hash() {
 		return hashcode;
 	}
 }

@@ -28,8 +28,8 @@ public class IntegrationExacte implements MethodeIntegration {
 	 * @see ch.ge.afc.calcul.math.integration.MethodeIntegration#integre(ch.ge.afc.calcul.math.Fonction, double, double)
 	 */
 	@Override
-	public double integre(Fonction f, double x1, double x2) {
-		if (!(f instanceof Primitivable)) throw new IllegalArgumentException("Pour faire une intégration exacte, la fonction doit posséder une primitive");
+	public final double integre(Fonction f, double x1, double x2) {
+		if (!(f instanceof Primitivable)) { throw new IllegalArgumentException("Pour faire une intégration exacte, la fonction doit posséder une primitive"); }
 		Fonction primitive = ((Primitivable)f).getFonctionPrimitive(); 
 		return primitive.valeur(x2) - primitive.valeur(x1);
 	}

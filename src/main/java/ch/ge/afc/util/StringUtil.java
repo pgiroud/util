@@ -16,7 +16,6 @@
 package ch.ge.afc.util;
 
 import java.text.DecimalFormat;
-import java.util.Set;
 
 public class StringUtil {
 
@@ -54,13 +53,14 @@ public class StringUtil {
 	 * @see java.lang.Character#isWhitespace
 	 */
 	public static boolean hasText(String insStr) {
-		int strLen;
-		if (insStr == null || (strLen = insStr.length()) == 0)
-			return false;
+		
+		if (insStr == null) { return false; }
+		int strLen = insStr.length();
+		if (0 == strLen) { return false; }
 		for (int i = 0; i < strLen; i++) {
 			char caractere = insStr.charAt(i);
-			if (!Character.isWhitespace(caractere) && !isNonBreakingSpace(caractere))
-				return true;
+			if (!Character.isWhitespace(caractere) && !isNonBreakingSpace(caractere)) {
+				return true; }
 		}
 		return false;
 	}
@@ -97,4 +97,8 @@ public class StringUtil {
 		return new java.text.DateFormatSymbols().getMonths()[mois];
 	}
 
+	/**
+	 * On rend le construteur privé pour ne pas permettre l'instanciation de la classe.
+	 */
+	private StringUtil() {}
 }

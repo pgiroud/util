@@ -158,6 +158,9 @@ public enum TypeArrondi {
      */
     MILLE_FRANC (BigDecimalUtil.MILLE,RoundingMode.HALF_UP);
 
+    
+    private static final int PRECISION_ARRONDI = 10;
+    
     /**************************************************/
     /******************* Attributs ********************/
     /**************************************************/
@@ -201,16 +204,15 @@ public enum TypeArrondi {
     /**************************************************/
 
     /**
-     * Arrondi le montant fourni en paramètre. Attention, le type CsMontant étant immuable,
-     * une nouvelle instance de CsMontant est retournée.
+     * Arrondi le montant fourni en paramètre. Attention, le type BigDecimal étant immuable,
+     * une nouvelle instance de BigDecimal est retournée.
      * Si le montant à arrondir est négatif, on retourne la valeur absolue arrondie multipliée par -1.
-     * La valeur retournée contient 2 chiffres après la virgule (qui peuvent être 00).
      * @param inoMontantAArrondir le montant à arrondir
      * @return Une nouvelle instance de CsMontant : le montant arrondi.
      */
     public BigDecimal arrondirMontant(BigDecimal inoMontantAArrondir) {
-      if (null == inoMontantAArrondir) return null;  
-      BigDecimal normalise = inoMontantAArrondir.divide(moPrecision, 10, moMode);
+      if (null == inoMontantAArrondir) { return null; }  
+      BigDecimal normalise = inoMontantAArrondir.divide(moPrecision, PRECISION_ARRONDI, moMode);
       return normalise.setScale(0, moMode).multiply(moPrecision).setScale(scale);
     }
 

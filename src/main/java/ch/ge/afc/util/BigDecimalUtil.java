@@ -20,7 +20,7 @@ import java.text.FieldPosition;
 import java.text.NumberFormat;
 import static java.math.BigDecimal.ZERO;
 
-public class BigDecimalUtil {
+public final class BigDecimalUtil {
 
 	// *************************************************************
 	// ******* CHAMPS STATIQUES
@@ -33,10 +33,13 @@ public class BigDecimalUtil {
 	// Pour le mode d'arrondi, on pourra trouver une justification dans
 	// http://www2.hursley.ibm.com/decimal/decifaq1.html#rounding.
 
-	private final static int DEFAULT_PRECISION = 15;
-	private final static int DEFAULT_ROUNDING_MODE = BigDecimal.ROUND_HALF_DOWN;
+	private static final int DEFAULT_PRECISION = 15;
+	private static final int DEFAULT_ROUNDING_MODE = BigDecimal.ROUND_HALF_DOWN;
 	
 	private static final char POUR_MILLE = '\u2030';
+	private static final int MULTIPLICATEUR_POUR_MILLE = 3;
+	private static final int MULTIPLICATEUR_POUR_CENT = 2;
+	private static final int PRECISION_POUR_INVERSION = 20;
 
 	public static final BigDecimal UN_CENTIME = new BigDecimal("0.01");
 	public static final BigDecimal CINQ_CTS = new BigDecimal("0.05");
@@ -47,44 +50,44 @@ public class BigDecimalUtil {
 	/**
 	 * Champ constant représentant 0 avec 2 decimales soit 0.00.
 	 */
-	public final static BigDecimal ZERO_2_DECIMALES = new BigDecimal("0.00");
+	public static final BigDecimal ZERO_2_DECIMALES = new BigDecimal("0.00");
 
 	/**
 	 * Champ constant représentant 1 avec 2 decimales soit 1.00.
 	 */
-	public final static BigDecimal UN = new BigDecimal("1.00");
+	public static final BigDecimal UN = new BigDecimal("1.00");
 
 	/**
 	 * Champ constant représentant 2 avec 2 decimales soit 2.00.
 	 */
-	public final static BigDecimal DEUX = new BigDecimal("2.00");
+	public static final BigDecimal DEUX = new BigDecimal("2.00");
 
 	/**
 	 * Champ constant représentant 3 avec 2 decimales soit 3.00.
 	 */
-	public final static BigDecimal TROIS = new BigDecimal("3.00");
+	public static final BigDecimal TROIS = new BigDecimal("3.00");
 
 	/**
 	 * Champ constant représentant 10 avec 2 decimales soit 10.00.
 	 */
-	public final static BigDecimal DIX = new BigDecimal("10.00");
+	public static final BigDecimal DIX = new BigDecimal("10.00");
 
 	/**
 	 * Champ constant représentant 1/4 avec 2 decimales soit 0.25.
 	 */
-	public final static BigDecimal UN_QUART = new BigDecimal("0.25");
+	public static final BigDecimal UN_QUART = new BigDecimal("0.25");
 
 	/**
 	 * Champ constant représentant 1/2 avec 2 decimales soit 0.50
 	 */
-	public final static BigDecimal UN_DEMI = new BigDecimal("0.50");
+	public static final BigDecimal UN_DEMI = new BigDecimal("0.50");
 
 	/**
 	 * Champ constant représentant 1/3 avec 15 decimales. En général, on préfera
 	 * faire un division par 3 que multiplier par 1/3 sauf si les performances
 	 * doivent être considérées.
 	 */
-	public final static BigDecimal UN_TIER;
+	public static final BigDecimal UN_TIER;
 
 	// *************************************************************
 	// ******* MÉTHODES STATIQUES
@@ -97,7 +100,7 @@ public class BigDecimalUtil {
 	/**
 	 * Cette méthode permet de formatter un BigDecimal avec un nombre de chiffre
 	 * maximum. Par exemple, si pNf formatte avec 2 chiffres après la virgule,
-	 * un appel à formatRight("12.346",pNf,5) retourne la String "   12.35"
+	 * un appel à formatRight("12.346",pNf,5) retourne la String "   12.346"
 	 * c'est-à-dire qu'on a ajouté 3 blancs en début de chaîne. Ceci est
 	 * pratique pour l'alignement.
 	 * 
@@ -148,15 +151,16 @@ public class BigDecimalUtil {
 	 * @return Le même nombre sans les 0
 	 */
 	public static BigDecimal trim(BigDecimal pNombre) {
+		BigDecimal nombreTronque = pNombre;
 		try {
 			while (true) {
-				pNombre = pNombre.setScale(pNombre.scale() - 1);
+				nombreTronque = nombreTronque.setScale(pNombre.scale() - 1);
 			}
 		} catch (ArithmeticException e) // NOPMD by thirion on 20.12.06 14:39
 		{
 			// il n'existe plus d 0
 		}
-		return pNombre;
+		return nombreTronque;
 	}
 
 	/**
@@ -210,17 +214,24 @@ public class BigDecimalUtil {
 		return pPremierNombre.compareTo(pSecondNombre);
 	}
 
-	public static BigDecimal parseTaux(String taux)
-			throws NumberFormatException {
+	/**
+	 * Cette méthode retourne un taux à partir de sa représentation.
+	 * Dans la représentation sont supportés les taux en % et les taux en pour mille.
+	 * Ainsi l'appel de cette méthode avec comme paramètre "2.5 %" retournera le décimal 0.025
+	 * @param taux le taux sous forme de chaîne de caractère c.-à-d. un nombre, un nombre suivi d'un pour cent ou un nombre suivi d'un pour mille. 
+	 * @return le taux sous forme de nombre.
+	 * @throws NumberFormatException si la chaîne de caractère n'est pas un taux.
+	 */
+	public static BigDecimal parseTaux(String taux) {
 		int multiplicateur = 0;
 		String chaineDecimale = taux;
 		if (StringUtil.hasText(taux)) {
 			if (-1 < taux.indexOf(POUR_MILLE)) {
-				multiplicateur = 3;
+				multiplicateur = MULTIPLICATEUR_POUR_MILLE;
 				chaineDecimale = chaineDecimale.substring(0,
 						taux.indexOf(POUR_MILLE)).trim();
 			} else if (-1 < taux.indexOf('%')) {
-				multiplicateur = 2;
+				multiplicateur = MULTIPLICATEUR_POUR_CENT;
 				chaineDecimale = chaineDecimale.substring(0, taux.indexOf('%'))
 						.trim();
 			}
@@ -232,12 +243,17 @@ public class BigDecimalUtil {
 		return tauxBD;
 	}
 
-	public static BigDecimal invert(BigDecimal pDecimal)
-			throws ArithmeticException {
+	/**
+	 * Retourne l'inverse (au sens de la multiplication) du nombre fourni en paramètre.
+	 * @param pDecimal le nombre à inverser
+	 * @return l'inverse du nombre c.-à-d. le nombre u tel que 1 = u * pDecimal
+	 * @throws ArithmeticException si pDecimal est égal à 0
+	 */
+	public static BigDecimal invert(BigDecimal pDecimal) {
 		// On commence par supprimer les 0 superflus
 		if (0 == ZERO.compareTo(pDecimal)) {
 			throw new ArithmeticException(); }
-		return trim(UN.divide(pDecimal, 20, BigDecimal.ROUND_HALF_UP));
+		return trim(UN.divide(pDecimal, PRECISION_POUR_INVERSION, BigDecimal.ROUND_HALF_UP));
 	}
 
 	public static NumberFormat getFormat(int nbDecimale) {
