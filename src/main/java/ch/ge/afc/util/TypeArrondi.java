@@ -156,8 +156,10 @@ public enum TypeArrondi {
     /**
      * Arrondi aux milles francs les plus proches.
      */
-    MILLE_FRANC (BigDecimalUtil.MILLE,RoundingMode.HALF_UP);
+    MILLE_FRANC (BigDecimalUtil.MILLE,RoundingMode.HALF_UP),
 
+
+    CINQUANTE_FRANC_DECALE_VINGT_CINQ(BigDecimal.valueOf(50),RoundingMode.HALF_DOWN,0,BigDecimal.valueOf(25));
     
     private static final int PRECISION_ARRONDI = 10;
     
@@ -165,9 +167,10 @@ public enum TypeArrondi {
     /******************* Attributs ********************/
     /**************************************************/
 
-    private final BigDecimal moPrecision;
-    private final RoundingMode moMode;
+    private final BigDecimal precision;
+    private final RoundingMode mode;
 	private final int scale;
+    private final BigDecimal offset;
 
     /**************************************************/
     /**************** Constructeurs *******************/
@@ -176,27 +179,34 @@ public enum TypeArrondi {
     /**
      * Construction d'un type d'arrondi en fournissant une précision, par exemple 0.05 pour un arrondi
      * aux cinq centimes, et un mode d'arrondi (arrondi au plus près, à la valeur supérieure ou inférieure)
-     * @param inoPrecision la précision : 0.05 pour un arrondi aux cinq centimes par exemple
-     * @param inoMode le mode d'arrondi i.e. au plus près, à la valeur supérieure ou inférieure
+     * @param precision la précision : 0.05 pour un arrondi aux cinq centimes par exemple
+     * @param mode le mode d'arrondi i.e. au plus près, à la valeur supérieure ou inférieure
      */
-    TypeArrondi(BigDecimal inoPrecision, RoundingMode inoMode) {
-        moPrecision = inoPrecision;
-        moMode = inoMode;
+    TypeArrondi(BigDecimal precision, RoundingMode mode) {
+        this.precision = precision;
+        this.mode = mode;
         scale = 0;
+        offset = BigDecimal.ZERO;
     }
 
     /**
      * Construction d'un type d'arrondi en fournissant une précision, par exemple 0.05 pour un arrondi
      * aux cinq centimes, et un mode d'arrondi (arrondi au plus près, à la valeur supérieure ou inférieure)
-     * @param inoPrecision la précision : 0.05 pour un arrondi aux cinq centimes par exemple
-     * @param inoMode le mode d'arrondi i.e. au plus près, à la valeur supérieure ou inférieure
+     * @param precision la précision : 0.05 pour un arrondi aux cinq centimes par exemple
+     * @param mode le mode d'arrondi i.e. au plus près, à la valeur supérieure ou inférieure
      * @param nbChiffreApresVirgule le nombre de chiffre après la virgule du résultat. Par exemple, pour un 
      * arrondi à 10 cts près, on voudra 2 chiffres après la virgule
      */
-    TypeArrondi(BigDecimal inoPrecision, RoundingMode inoMode, int nbChiffreApresVirgule) {
-        moPrecision = inoPrecision;
-        moMode = inoMode;
+    TypeArrondi(BigDecimal precision, RoundingMode mode, int nbChiffreApresVirgule) {
+        this(precision,mode,nbChiffreApresVirgule,BigDecimal.ZERO);
+    }
+
+
+    TypeArrondi(BigDecimal precision, RoundingMode mode, int nbChiffreApresVirgule, BigDecimal offset) {
+        this.precision = precision;
+        this.mode = mode;
         scale = nbChiffreApresVirgule;
+        this.offset = offset;
     }
 
     /**************************************************/
@@ -211,9 +221,10 @@ public enum TypeArrondi {
      * @return Une nouvelle instance de CsMontant : le montant arrondi.
      */
     public BigDecimal arrondirMontant(BigDecimal inoMontantAArrondir) {
-      if (null == inoMontantAArrondir) { return null; }  
-      BigDecimal normalise = inoMontantAArrondir.divide(moPrecision, PRECISION_ARRONDI, moMode);
-      return normalise.setScale(0, moMode).multiply(moPrecision).setScale(scale);
+      if (null == inoMontantAArrondir) { return null; }
+      BigDecimal montantAArrondirTranslate = inoMontantAArrondir.subtract(offset);
+      BigDecimal normalise = montantAArrondirTranslate.divide(precision, PRECISION_ARRONDI, mode);
+      return normalise.setScale(0, mode).multiply(precision).setScale(scale).add(offset);
     }
 
 }

@@ -127,7 +127,18 @@ public class TypeArrondiTest {
         // Arrondi de 12875.243 au 10 centimes supérieur
         testArrondi(TypeArrondi.DIX_CTS_SUP,"12875.243","12875.30");
     }
-    
+
+    @Test
+    public void cinquanteFrancAvecOffsetVingtCinq() {
+        // arrondi de 3317
+        testArrondi(TypeArrondi.CINQUANTE_FRANC_DECALE_VINGT_CINQ,"3317","3325");
+        testArrondi(TypeArrondi.CINQUANTE_FRANC_DECALE_VINGT_CINQ,"3303","3325");
+        testArrondi(TypeArrondi.CINQUANTE_FRANC_DECALE_VINGT_CINQ,"3300","3275");
+        testArrondi(TypeArrondi.CINQUANTE_FRANC_DECALE_VINGT_CINQ,"3299","3275");
+    }
+
+
+
     private void testArrondi(TypeArrondi inoTypeArrondi,String inoValeurAArrondi, String inoValeurAttendue) {
        assertEquals(new BigDecimal(inoValeurAttendue),inoTypeArrondi.arrondirMontant(new BigDecimal(inoValeurAArrondi)));
     }
