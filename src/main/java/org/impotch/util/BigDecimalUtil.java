@@ -28,8 +28,6 @@ public final class BigDecimalUtil {
 
 	// Ces choix sont arbitraires. 15 chiffres significatifs devraient être
 	// suffisant dans la plupart des cas.
-	// Il conviendra en java 1.5 d'utiliser un
-	// MathContext à la place.
 	// Pour le mode d'arrondi, on pourra trouver une justification dans
 	// http://www2.hursley.ibm.com/decimal/decifaq1.html#rounding.
 
