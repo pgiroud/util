@@ -30,6 +30,11 @@ public enum TypeArrondi {
     /**************************************************/
 
     /**
+     * Arrondi au dixième de centime le plus proche.
+     */
+    DIXIEME_CT(new BigDecimal("0.001"),RoundingMode.HALF_UP,3),
+
+    /**
      * Arrondi au centime inférieur. Par exemple, 2.288 sera
      * arrondi à 2.28
      */
