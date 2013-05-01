@@ -12,7 +12,8 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with impotch/util.  If not, see <http://www.gnu.org/licenses/>.
- */package org.impotch.util;
+ */
+package org.impotch.util;
 
 
 import java.math.BigDecimal;
