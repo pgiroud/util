@@ -16,17 +16,10 @@
 package org.impotch.util;
 
 import java.math.BigDecimal;
-import org.fest.assertions.api.AbstractAssert;
-import org.fest.assertions.api.Assertions;
-import org.fest.assertions.data.Offset;
+import org.assertj.core.api.AbstractAssert;
+import org.assertj.core.api.Assertions;
+import org.assertj.core.data.Offset;
 
-/**
- * Created with IntelliJ IDEA.
- * User: patrick
- * Date: 09/12/12
- * Time: 17:55
- * To change this template use File | Settings | File Templates.
- */
 public class TauxAssert extends AbstractAssert<TauxAssert,BigDecimal> {
 
     public TauxAssert(BigDecimal actual) {
