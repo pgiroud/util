@@ -33,7 +33,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <compileSource>1.6</compileSource>
     <junit.version>4.12</junit.version>
-    <assertj.version>3.0.0</assertj.version>
+    <assertj.version>3.2.0</assertj.version>
   </properties>
 
   <!-- Build Settings -->
