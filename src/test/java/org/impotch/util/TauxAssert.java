@@ -22,12 +22,19 @@ import org.assertj.core.data.Offset;
 
 public class TauxAssert extends AbstractAssert<TauxAssert,BigDecimal> {
 
+    private BigDecimal tolerance = null;
+
     public TauxAssert(BigDecimal actual) {
         super(actual, TauxAssert.class);
     }
 
     public static TauxAssert assertThat(BigDecimal actual) {
         return new TauxAssert(actual);
+    }
+
+    public TauxAssert tolerance(String ecartTauxTolere) {
+        tolerance = BigDecimalUtil.parseTaux(ecartTauxTolere);
+        return this;
     }
 
     public TauxAssert isEqualTo(String taux) {
@@ -42,10 +49,17 @@ public class TauxAssert extends AbstractAssert<TauxAssert,BigDecimal> {
             actualStr = actual.movePointRight(3).toPlainString() + " ‰";
         }
 
-        // use of existing Fest assertions but replacing the error message (format specifier are supported)
-        Assertions.assertThat(actual)
-                //.overridingErrorMessage("Expected rate to be %1$s but was %2$s", taux, actualStr)
-                .isEqualTo(tauxParse);
+        if (null == tolerance) {
+            Assertions.assertThat(actual)
+                    // TODO PGI Voir pourquoi il y a un problème quand on met des
+                    // taux en %
+                    //.overridingErrorMessage("Le taux attendu devrait être %1$s mais est %2$s", taux, actualStr)
+                    .isEqualTo(tauxParse);
+        } else {
+            Assertions.assertThat(actual)
+                    //.overridingErrorMessage("Le taux attendu devrait être %1$s mais est %2$s", taux, actualStr)
+                    .isCloseTo(tauxParse,Offset.offset(tolerance));
+        }
          return this;
 
     }
