@@ -1,15 +1,15 @@
 /**
  * This file is part of impotch/util.
- *
+ * <p>
  * impotch/util is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License.
- *
+ * <p>
  * impotch/util is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * <p>
  * You should have received a copy of the GNU General Public License
  * along with impotch/util.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -23,8 +23,8 @@ import java.math.RoundingMode;
  * Un type d'arrondi sert à arrondir un décimal.
  */
 public enum TypeArrondi {
-	
-	
+
+
     /**************************************************/
     /***********Instances de l'énumération ************/
     /**************************************************/
@@ -32,36 +32,36 @@ public enum TypeArrondi {
     /**
      * Arrondi au dixième de centime le plus proche.
      */
-    DIXIEME_CT(new BigDecimal("0.001"),RoundingMode.HALF_UP,3),
+    DIXIEME_CT(new BigDecimal("0.001"), RoundingMode.HALF_UP, 3),
 
     /**
      * Arrondi au centime inférieur. Par exemple, 2.288 sera
      * arrondi à 2.28
      */
-    CT_INF (BigDecimalUtil.UN_CENTIME,RoundingMode.DOWN,2),
+    CT_INF(BigDecimalUtil.UN_CENTIME, RoundingMode.DOWN, 2),
 
     /**
      * Arrondi au centime le plus proche.
      */
-    CT(BigDecimalUtil.UN_CENTIME,RoundingMode.HALF_UP,2),
-    
+    CT(BigDecimalUtil.UN_CENTIME, RoundingMode.HALF_UP, 2),
+
     /**
      * Arrondi au centime supérieur.
      */
-    CT_SUP (BigDecimalUtil.UN_CENTIME,RoundingMode.UP,2),
-    
+    CT_SUP(BigDecimalUtil.UN_CENTIME, RoundingMode.UP, 2),
+
     /**
      * Arrondi aux cinq centimes inférieur. Par exemple, 2.28 sera
      * arrondi à 2.25
      */
-    CINQ_CTS_INF (BigDecimalUtil.CINQ_CTS,RoundingMode.DOWN,2),
+    CINQ_CTS_INF(BigDecimalUtil.CINQ_CTS, RoundingMode.DOWN, 2),
 
 
     /**
      * Arrondi aux cinq centimes supérieurs. Par exemple, 2.28 sera arrondi
      * à 2.30
      */
-    CINQ_CTS_SUP (BigDecimalUtil.CINQ_CTS,RoundingMode.UP,2),
+    CINQ_CTS_SUP(BigDecimalUtil.CINQ_CTS, RoundingMode.UP, 2),
 
 
     /**
@@ -72,109 +72,109 @@ public enum TypeArrondi {
      *  <li>2.275 sera arrondi à 2.30</li>
      * </ul>
      */
-    CINQ_CTS (BigDecimalUtil.CINQ_CTS,RoundingMode.HALF_UP,2),
+    CINQ_CTS(BigDecimalUtil.CINQ_CTS, RoundingMode.HALF_UP, 2),
 
 
     /**
      * Arrondi aux dix centimes inférieur
      */
-    DIX_CTS_INF (BigDecimalUtil.DIX_CTS,RoundingMode.DOWN,2),
+    DIX_CTS_INF(BigDecimalUtil.DIX_CTS, RoundingMode.DOWN, 2),
 
 
     /**
      * Arrondi aux dix centimes supérieurs
      */
-    DIX_CTS_SUP (BigDecimalUtil.DIX_CTS,RoundingMode.UP,2),
+    DIX_CTS_SUP(BigDecimalUtil.DIX_CTS, RoundingMode.UP, 2),
 
 
     /**
      * Arrondi aux dix centimes les plus proches.
      */
-    DIX_CTS (BigDecimalUtil.DIX_CTS,RoundingMode.HALF_UP,2),
+    DIX_CTS(BigDecimalUtil.DIX_CTS, RoundingMode.HALF_UP, 2),
 
 
     /**
      * Arrondi au franc inférieur.
      */
-    FRANC_INF (BigDecimalUtil.UN,RoundingMode.DOWN),
+    FRANC_INF(BigDecimalUtil.UN, RoundingMode.DOWN),
 
 
     /**
      * Arrondi au franc supérieur.
      */
-    FRANC_SUP (BigDecimalUtil.UN,RoundingMode.UP),
+    FRANC_SUP(BigDecimalUtil.UN, RoundingMode.UP),
 
 
     /**
      * Arrondi au franc le plus proche
      */
-    FRANC (BigDecimalUtil.UN,RoundingMode.HALF_UP),
+    FRANC(BigDecimalUtil.UN, RoundingMode.HALF_UP),
 
 
     /**
      * Arrondi aux dix francs inférieurs
      */
-    DIX_FRANC_INF (BigDecimalUtil.DIX,RoundingMode.DOWN),
+    DIX_FRANC_INF(BigDecimalUtil.DIX, RoundingMode.DOWN),
 
 
     /**
      * Arrondi au dix francs supérieurs
      */
-    DIX_FRANC_SUP (BigDecimalUtil.DIX,RoundingMode.UP),
+    DIX_FRANC_SUP(BigDecimalUtil.DIX, RoundingMode.UP),
 
 
     /**
      * Arrondi aux dix francs les plus proches.
      */
-    DIX_FRANC (BigDecimalUtil.DIX,RoundingMode.HALF_UP),
+    DIX_FRANC(BigDecimalUtil.DIX, RoundingMode.HALF_UP),
 
 
     /**
      * Arrondi aux cents francs inférieurs
      */
-    CENT_FRANC_INF (BigDecimalUtil.CENT,RoundingMode.DOWN),
+    CENT_FRANC_INF(BigDecimalUtil.CENT, RoundingMode.DOWN),
 
 
     /**
      * Arrondi aux cents francs supérieurs
      */
-    CENT_FRANC_SUP (BigDecimalUtil.CENT,RoundingMode.UP),
+    CENT_FRANC_SUP(BigDecimalUtil.CENT, RoundingMode.UP),
 
 
     /**
      * Arrondi aux cents francs les plus proches.
      */
-    CENT_FRANC (BigDecimalUtil.CENT,RoundingMode.HALF_UP),
+    CENT_FRANC(BigDecimalUtil.CENT, RoundingMode.HALF_UP),
 
     /**
      * Arrondi aux milles francs inférieurs
      */
-    MILLE_FRANC_INF (BigDecimalUtil.MILLE,RoundingMode.DOWN),
+    MILLE_FRANC_INF(BigDecimalUtil.MILLE, RoundingMode.DOWN),
 
 
     /**
      * Arrondi aux milles francs supérieurs
      */
-    MILLE_FRANC_SUP (BigDecimalUtil.MILLE,RoundingMode.UP),
+    MILLE_FRANC_SUP(BigDecimalUtil.MILLE, RoundingMode.UP),
 
 
     /**
      * Arrondi aux milles francs les plus proches.
      */
-    MILLE_FRANC (BigDecimalUtil.MILLE,RoundingMode.HALF_UP),
+    MILLE_FRANC(BigDecimalUtil.MILLE, RoundingMode.HALF_UP),
 
 
-    CINQUANTE_FRANC_DECALE_VINGT_CINQ(BigDecimal.valueOf(50),RoundingMode.HALF_DOWN,0,BigDecimal.valueOf(25));
-    
+    CINQUANTE_FRANC_DECALE_VINGT_CINQ(BigDecimal.valueOf(50), RoundingMode.HALF_DOWN, 0, BigDecimal.valueOf(25));
+
     private static final int PRECISION_ARRONDI = 10;
-    
+
     /**************************************************/
     /******************* Attributs ********************/
     /**************************************************/
 
     private final BigDecimal precision;
     private final RoundingMode mode;
-	private final int scale;
+    private final int scale;
     private final BigDecimal offset;
 
     /**************************************************/
@@ -203,7 +203,7 @@ public enum TypeArrondi {
      * arrondi à 10 cts près, on voudra 2 chiffres après la virgule
      */
     TypeArrondi(BigDecimal precision, RoundingMode mode, int nbChiffreApresVirgule) {
-        this(precision,mode,nbChiffreApresVirgule,BigDecimal.ZERO);
+        this(precision, mode, nbChiffreApresVirgule, BigDecimal.ZERO);
     }
 
 
@@ -226,10 +226,12 @@ public enum TypeArrondi {
      * @return Une nouvelle instance de CsMontant : le montant arrondi.
      */
     public BigDecimal arrondirMontant(BigDecimal inoMontantAArrondir) {
-      if (null == inoMontantAArrondir) { return null; }
-      BigDecimal montantAArrondirTranslate = inoMontantAArrondir.subtract(offset);
-      BigDecimal normalise = montantAArrondirTranslate.divide(precision, PRECISION_ARRONDI, mode);
-      return normalise.setScale(0, mode).multiply(precision).setScale(scale).add(offset);
+        if (null == inoMontantAArrondir) {
+            return null;
+        }
+        BigDecimal montantAArrondirTranslate = inoMontantAArrondir.subtract(offset);
+        BigDecimal normalise = montantAArrondirTranslate.divide(precision, PRECISION_ARRONDI, mode);
+        return normalise.setScale(0, mode).multiply(precision).setScale(scale).add(offset);
     }
 
 }
