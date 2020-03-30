@@ -31,6 +31,7 @@
 package org.impotch.util;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.FieldPosition;
 import java.text.NumberFormat;
 
@@ -48,7 +49,7 @@ public final class BigDecimalUtil {
     // http://www2.hursley.ibm.com/decimal/decifaq1.html#rounding.
 
     private static final int DEFAULT_PRECISION = 15;
-    private static final int DEFAULT_ROUNDING_MODE = BigDecimal.ROUND_HALF_DOWN;
+    private static final RoundingMode DEFAULT_ROUNDING_MODE = RoundingMode.HALF_DOWN;
 
     private static final char POUR_MILLE = '\u2030';
     private static final int MULTIPLICATEUR_POUR_MILLE = 3;
