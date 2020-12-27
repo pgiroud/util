@@ -6,21 +6,14 @@
   <!-- The Basics -->
   <groupId>org.impotch</groupId>
   <artifactId>util</artifactId>
-  <version>1.0.6-snapshot</version>
+  <version>1.0.6</version>
   <packaging>jar</packaging>
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.jupiter.version}</version>
       <scope>test</scope>
-      <!-- Hamcrest est nécessaire même si on n'utilise pas les assertions -->
-      <!--exclusions>
-        <exclusion>
-          <artifactId>hamcrest-core</artifactId>
-          <groupId>org.hamcrest</groupId>
-        </exclusion>
-      </exclusions-->
     </dependency>
     <dependency>
       <groupId>org.assertj</groupId>
@@ -28,12 +21,18 @@
       <version>${assertj.version}</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>RELEASE</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <compileSource>1.8</compileSource>
-    <junit.version>4.12</junit.version>
-    <assertj.version>3.5.2</assertj.version>
+    <compileSource>11</compileSource>
+    <junit.jupiter.version>5.7.0</junit.jupiter.version>
+    <assertj.version>3.18.1</assertj.version>
   </properties>
 
   <!-- Build Settings -->
@@ -62,9 +61,9 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>com.mycila.maven-license-plugin</groupId>
-        <artifactId>maven-license-plugin</artifactId>
-        <version>1.9.0</version>
+        <groupId>com.mycila</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <version>3.0</version>
         <configuration>
           <!-- Template location -->
           <header>licence-header.txt</header>

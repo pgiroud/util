@@ -33,16 +33,16 @@ package org.impotch.util;
 
 import java.math.BigDecimal;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
 public class TypeArrondiTest {
 
     @Test
     public void arrondirNull() {
-        assertNull("Arrondi d'un null", TypeArrondi.CINQ_CTS.arrondirMontant(null));
+        assertThat(TypeArrondi.CINQ_CTS.arrondirMontant(null)).isNull();
     }
 
     @Test
@@ -169,7 +169,7 @@ public class TypeArrondiTest {
 
 
     private void testArrondi(TypeArrondi inoTypeArrondi, String inoValeurAArrondi, String inoValeurAttendue) {
-        assertEquals(new BigDecimal(inoValeurAttendue), inoTypeArrondi.arrondirMontant(new BigDecimal(inoValeurAArrondi)));
+        assertThat(inoTypeArrondi.arrondirMontant(new BigDecimal(inoValeurAArrondi))).isEqualTo(new BigDecimal(inoValeurAttendue));
     }
 
 }
