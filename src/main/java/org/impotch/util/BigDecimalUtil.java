@@ -1,34 +1,19 @@
-/**
- * This file is part of impotch/util.
- *
- * impotch/util is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License.
- *
- * impotch/util is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with impotch/util.  If not, see <http://www.gnu.org/licenses/>.
- */
-/**
- * This file is part of impotch/util.
- * <p>
- * impotch/util is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License.
- * <p>
- * impotch/util is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * <p>
- * You should have received a copy of the GNU General Public License
- * along with impotch/util.  If not, see <http://www.gnu.org/licenses/>.
- */
 package org.impotch.util;
+/**
+ * This file is part of impotch/util.
+ * <p>
+ * impotch/util is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License.
+ * <p>
+ * impotch/util is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * <p>
+ * You should have received a copy of the GNU General Public License
+ * along with impotch/util.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -56,9 +41,9 @@ public final class BigDecimalUtil {
     private static final int MULTIPLICATEUR_POUR_CENT = 2;
     private static final int PRECISION_POUR_INVERSION = 20;
 
-    public static final BigDecimal UN_CENTIME = new BigDecimal("0.01");
-    public static final BigDecimal CINQ_CTS = new BigDecimal("0.05");
-    public static final BigDecimal DIX_CTS = new BigDecimal("0.10");
+    public static final BigDecimal UN_CENTIEME = new BigDecimal("0.01");
+    public static final BigDecimal CINQ_CENTIEMES = new BigDecimal("0.05");
+    public static final BigDecimal UN_DIXIEME_AVEC_2_DECIMALES = new BigDecimal("0.10");
     public static final BigDecimal CENT = new BigDecimal("100");
     public static final BigDecimal MILLE = new BigDecimal("1000");
 
@@ -267,7 +252,7 @@ public final class BigDecimalUtil {
         if (0 == ZERO.compareTo(pDecimal)) {
             throw new ArithmeticException();
         }
-        return trim(UN.divide(pDecimal, PRECISION_POUR_INVERSION, BigDecimal.ROUND_HALF_UP));
+        return trim(UN.divide(pDecimal, PRECISION_POUR_INVERSION, RoundingMode.HALF_UP));
     }
 
     public static NumberFormat getFormat(int nbDecimale) {
