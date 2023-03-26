@@ -216,9 +216,22 @@ public final class BigDecimalUtil {
      * Cette méthode retourne un taux à partir de sa représentation.
      * Dans la représentation sont supportés les taux en % et les taux en pour mille.
      * Ainsi l'appel de cette méthode avec comme paramètre "2.5 %" retournera le décimal 0.025
+     * @param nombreOuTaux un nombre ou un taux sous forme de chaîne de caractère c.-à-d. un nombre, un nombre suivi d'un pour cent ou un nombre suivi d'un pour mille.
+     * @return le taux sous forme de nombre.
+     * @throws NumberFormatException si la chaîne de caractère n'est pas un taux.
+     */
+    public static BigDecimal parse(String nombreOuTaux) {
+        return parseTaux(nombreOuTaux);
+    }
+
+    /**
+     * Cette méthode retourne un taux à partir de sa représentation.
+     * Dans la représentation sont supportés les taux en % et les taux en pour mille.
+     * Ainsi l'appel de cette méthode avec comme paramètre "2.5 %" retournera le décimal 0.025
      * @param taux le taux sous forme de chaîne de caractère c.-à-d. un nombre, un nombre suivi d'un pour cent ou un nombre suivi d'un pour mille.
      * @return le taux sous forme de nombre.
      * @throws NumberFormatException si la chaîne de caractère n'est pas un taux.
+     * @deprecated Utiliser la méthode parse qui fait également le job
      */
     public static BigDecimal parseTaux(String taux) {
         int multiplicateur = 0;
