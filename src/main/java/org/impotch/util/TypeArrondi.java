@@ -218,6 +218,10 @@ public enum TypeArrondi {
     /******************* Méthodes *********************/
     /**************************************************/
 
+    public BigDecimal precision() {
+        return this.precision;
+    }
+
     /**
      * Arrondi le montant fourni en paramètre. Attention, le type BigDecimal étant immuable,
      * une nouvelle instance de BigDecimal est retournée.
