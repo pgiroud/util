@@ -153,8 +153,8 @@ public class TypeArrondiTest {
     }
 
 
-    private void testArrondi(TypeArrondi inoTypeArrondi, String inoValeurAArrondi, String inoValeurAttendue) {
-        assertThat(inoTypeArrondi.arrondirMontant(new BigDecimal(inoValeurAArrondi))).isEqualTo(new BigDecimal(inoValeurAttendue));
+    private void testArrondi(TypeArrondi typeArrondi, String valeur, String valeurAttendue) {
+        assertThat(typeArrondi.arrondir(new BigDecimal(valeur))).isEqualTo(new BigDecimal(valeurAttendue));
     }
 
 }

@@ -22,7 +22,6 @@ public class StringUtil {
     /**
      * Une espace insécable.
      */
-
     public static final String ESPACE_INSECABLE = "\u00A0";
 
     public static final String POUR_MILLE = "\u2030";
@@ -33,8 +32,8 @@ public class StringUtil {
 
     /**
      * Vérifie que la chaîne de caractère passée en paramètre contient du texte.
-     * Elle retourne <code>true</code> si la chaîne n'est pas <code>null<code>,
-     * sa <code>longueur est > 0</code>, et elle a au moins un caractère qui
+     * Elle retourne <code>true</code> si la chaîne n'est pas <code>null</code>,
+     * sa <code>longueur est strictement positive</code>, et elle a au moins un caractère qui
      * n'est pas une espace.
      * <p>
      *
@@ -46,10 +45,9 @@ public class StringUtil {
      * StringUtil.hasText(&quot; 12345 &quot;) = true
      * </pre>
      *
-     * @param insStr
-     *            la chaîne de caractère à tester, peut être <code>null</code>
+     * @param insStr la chaîne de caractère à tester, peut être <code>null</code>
      * @return <code>true</code> si la chaîne de caractère n'est pas null, sa
-     *         longueur > 0, et contient un caractère autre qu'une espace.
+     *         longueur strictement positive, et contient un caractère autre qu'une espace.
      * @see java.lang.Character#isWhitespace
      */
     public static boolean hasText(String insStr) {
@@ -71,11 +69,8 @@ public class StringUtil {
     }
 
     /**
-     * D'après <a href="http://www.reveenjoie-poesie.com/outils-linguistiques/Typographie_francaise.html"
-     * >la règle de typographie
-     * <p/>
-     * </a>, il faut placer une espace insécable avant le signe du pour mille.
-     * <p/>
+     * D'après <a href="http://www.reveenjoie-poesie.com/outils-linguistiques/Typographie_francaise.html">la règle de typographie</a>, il faut placer une espace insécable avant le signe du pour mille.
+     *
      * Par exemple, on voudra formatter 0.034534 en 34.53 pour mille en
      * utilisant buildPourMilleFormat(5).
      *
@@ -83,7 +78,6 @@ public class StringUtil {
      *            Le nombre maximum de décimal
      * @return Le format
      */
-
     public static DecimalFormat buildPourMilleFormat(int pNombreDecimalMaximum)
 
     {

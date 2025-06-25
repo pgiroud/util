@@ -35,8 +35,8 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <compileSource>21</compileSource>
-    <junit.jupiter.version>5.11.3</junit.jupiter.version>
-    <assertj.version>3.26.3</assertj.version>
+    <junit.jupiter.version>5.13.1</junit.jupiter.version>
+    <assertj.version>3.27.3</assertj.version>
   </properties>
 
   <!-- Build Settings -->
@@ -45,7 +45,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.13.0</version>
+        <version>3.14.0</version>
         <configuration>
           <source>${compileSource}</source>
           <target>${compileSource}</target>
@@ -68,12 +68,31 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.5.2</version>
+        <version>3.5.3</version>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.13</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>report</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>com.mycila</groupId>
         <artifactId>license-maven-plugin</artifactId>
-        <version>4.6</version>
+        <version>5.0.0</version>
         <configuration>
           <mapping>
             <java>JAVAPKG_STYLE</java>
@@ -104,6 +123,10 @@
           </execution-->
         </executions>
       </plugin>
+    </plugins>
+  </build>
+  <reporting>
+    <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
@@ -111,11 +134,69 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+        <version>3.5.3</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>3.8.0</version>
+        <version>3.9.0</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.11.2</version>
+        <configuration>
+          <show>package</show>
+          <charset>${project.build.sourceEncoding}</charset>
+          <docfilessubdirs>true</docfilessubdirs>
+          <links>
+            <!-- JSE -->
+            <link>https://docs.oracle.com/en/java/javase/21/docs/api/</link>
+            <!-- Libraries -->
+            <link>https://docs.junit.org/current/api/</link>
+            <link>https://www.slf4j.org/apidocs/</link>
+          </links>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>3.26.0</version>
+        <configuration>
+          <!--<linkXref>true</linkXref>-->
+          <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
+          <minimumTokens>100</minimumTokens>
+          <targetJdk>${compileSource}</targetJdk>
+          <!--excludes>
+            <exclude>**/*Bean.java</exclude>
+            <exclude>**/generated/*.java</exclude>
+          </excludes>
+          <excludeRoots>
+            <excludeRoot>target/generated-sources/stubs</excludeRoot>
+          </excludeRoots-->
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>3.6.0</version>
+        <configuration>
+          <configLocation>google_checks.xml</configLocation>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jxr-plugin</artifactId>
+        <version>3.6.0</version>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.13</version>
       </plugin>
     </plugins>
-  </build>
+  </reporting>
 
   <!-- More Project Information -->
   <name>util</name>
@@ -123,7 +204,7 @@
   <licenses>
     <license>
       <name>GNU General Public License (GPL)</name>
-      <url>http://www.gnu.org/licenses/gpl.txt</url>
+      <url>https://www.gnu.org/licenses/gpl.txt</url>
     </license>
   </licenses>
 

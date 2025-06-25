@@ -156,7 +156,7 @@ public final class BigDecimalUtil {
             while (true) {
                 nombreTronque = nombreTronque.setScale(pNombre.scale() - 1);
             }
-        } catch (ArithmeticException e) // NOPMD by thirion on 20.12.06 14:39
+        } catch (ArithmeticException e) // NOPMD
         {
             // il n'existe plus d 0
         }
@@ -168,7 +168,7 @@ public final class BigDecimalUtil {
      *
      * @param pNombre
      *            Le nombre à tester. S'il est NULL, la méthode renvoie false
-     * @return true si le pNombre est non NULL et > 0.
+     * @return true si le pNombre est non NULL et strictement positif.
      */
     public static boolean isStrictementPositif(BigDecimal pNombre) {
         return null != pNombre && 0 > ZERO.compareTo(pNombre);
@@ -179,7 +179,7 @@ public final class BigDecimalUtil {
      *
      * @param pNombre
      *            Le nombre à tester. S'il est NULL, la méthode renvoie false
-     * @return true si le pNombre est non NULL et < 0.
+     * @return true si le pNombre est non NULL et strictement négatif.
      */
     public static boolean isStrictementNegatif(BigDecimal pNombre) {
         return null != pNombre && 0 < ZERO.compareTo(pNombre);

@@ -12,7 +12,7 @@ package org.impotch.util.math;
  * GNU General Public License for more details.
  * <p>
  * You should have received a copy of the GNU General Public License
- * along with impotch/util.  If not, see <http://www.gnu.org/licenses/>.
+ * along with impotch/util.  If not, see <a href="https://www.gnu.org/licenses/">https://www.gnu.org/licenses/</a>.
  */
 
 

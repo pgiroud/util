@@ -74,6 +74,7 @@ public enum TypeArrondi {
      */
     CINQ_CENTIEMES_LES_PLUS_PROCHES(BigDecimalUtil.CINQ_CENTIEMES, RoundingMode.HALF_UP, 2),
 
+    VINGTIEME_LE_PLUS_PROCHE(BigDecimalUtil.CINQ_CENTIEMES, RoundingMode.HALF_UP, 2),
 
     /**
      * Arrondi aux dix centimes inférieur
@@ -229,11 +230,21 @@ public enum TypeArrondi {
      * @param inoMontantAArrondir le montant à arrondir
      * @return Une nouvelle instance de CsMontant : le montant arrondi.
      */
+    @Deprecated
     public BigDecimal arrondirMontant(BigDecimal inoMontantAArrondir) {
         if (null == inoMontantAArrondir) {
             return null;
         }
         BigDecimal montantAArrondirTranslate = inoMontantAArrondir.subtract(offset);
+        BigDecimal normalise = montantAArrondirTranslate.divide(precision, PRECISION_ARRONDI, mode);
+        return normalise.setScale(0, mode).multiply(precision).setScale(scale).add(offset);
+    }
+
+    public BigDecimal arrondir(BigDecimal valeur) {
+        if (null == valeur) {
+            return null;
+        }
+        BigDecimal montantAArrondirTranslate = valeur.subtract(offset);
         BigDecimal normalise = montantAArrondirTranslate.divide(precision, PRECISION_ARRONDI, mode);
         return normalise.setScale(0, mode).multiply(precision).setScale(scale).add(offset);
     }
