@@ -231,7 +231,7 @@ public final class BigDecimalUtil {
      * @param taux le taux sous forme de chaîne de caractère c.-à-d. un nombre, un nombre suivi d'un pour cent ou un nombre suivi d'un pour mille.
      * @return le taux sous forme de nombre.
      * @throws NumberFormatException si la chaîne de caractère n'est pas un taux.
-     * @deprecated Utiliser la méthode parse qui fait également le job
+     * @deprecated Utiliser la méthode parse ou tx qui fait également le job
      */
     public static BigDecimal parseTaux(String taux) {
         int multiplicateur = 0;
@@ -252,6 +252,15 @@ public final class BigDecimalUtil {
             tauxBD = tauxBD.movePointLeft(multiplicateur);
         }
         return tauxBD;
+    }
+
+    /**
+     * Même méthode que parse mais avec une syntaxe plus courte !
+     * @param taux le taux qui peut être écrit avec des % ou des ‰
+     * @return le taux en décimal. Par exemple : tx("2.31 %") retournera 0.0231
+     */
+    public static BigDecimal tx(String taux) {
+        return parse(taux);
     }
 
     /**

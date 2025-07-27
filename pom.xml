@@ -165,7 +165,6 @@
         <version>3.26.0</version>
         <configuration>
           <!--<linkXref>true</linkXref>-->
-          <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
           <minimumTokens>100</minimumTokens>
           <targetJdk>${compileSource}</targetJdk>
           <!--excludes>
