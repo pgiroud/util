@@ -6,7 +6,7 @@
   <!-- The Basics -->
   <groupId>org.impotch</groupId>
   <artifactId>util</artifactId>
-  <version>1.1.4-SNAPSHOT</version>
+  <version>1.1.6</version>
   <packaging>jar</packaging>
   <dependencyManagement>
     <dependencies>
@@ -34,9 +34,9 @@
   </dependencies>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <compileSource>21</compileSource>
-    <junit.jupiter.version>5.13.1</junit.jupiter.version>
-    <assertj.version>3.27.3</assertj.version>
+    <maven.compiler.release>25</maven.compiler.release>
+    <junit.jupiter.version>6.0.0</junit.jupiter.version>
+    <assertj.version>3.27.6</assertj.version>
   </properties>
 
   <!-- Build Settings -->
@@ -45,13 +45,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.14.0</version>
-        <configuration>
-          <source>${compileSource}</source>
-          <target>${compileSource}</target>
-          <encoding>${project.build.sourceEncoding}</encoding>
-		  <showDeprecation>true</showDeprecation>
-        </configuration>
+        <version>3.14.1</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -68,12 +62,12 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.5.3</version>
+        <version>3.5.4</version>
       </plugin>
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.13</version>
+        <version>0.8.14</version>
         <executions>
           <execution>
             <goals>
@@ -135,7 +129,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-report-plugin</artifactId>
-        <version>3.5.3</version>
+        <version>3.5.4</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -145,7 +139,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.11.2</version>
+        <version>3.12.0</version>
         <configuration>
           <show>package</show>
           <charset>${project.build.sourceEncoding}</charset>
@@ -162,7 +156,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-pmd-plugin</artifactId>
-        <version>3.26.0</version>
+        <version>3.28.0</version>
         <configuration>
           <!--<linkXref>true</linkXref>-->
           <minimumTokens>100</minimumTokens>
@@ -192,7 +186,7 @@
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.13</version>
+        <version>0.8.14</version>
       </plugin>
     </plugins>
   </reporting>
