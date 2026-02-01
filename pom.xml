@@ -6,7 +6,7 @@
   <!-- The Basics -->
   <groupId>org.impotch</groupId>
   <artifactId>util</artifactId>
-  <version>1.1.7</version>
+  <version>1.1.8-snapshot</version>
   <packaging>jar</packaging>
   <dependencyManagement>
     <dependencies>
@@ -35,8 +35,23 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>25</maven.compiler.release>
-    <junit.jupiter.version>6.0.0</junit.jupiter.version>
-    <assertj.version>3.27.6</assertj.version>
+    <junit.jupiter.version>6.0.2</junit.jupiter.version>
+    <assertj.version>3.27.7</assertj.version>
+
+    <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
+    <maven-jar-plugin.version>3.5.0</maven-jar-plugin.version> <!-- 15/11/2025 -->
+    <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version> <!-- 10/09/2025 -->
+    <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version> <!-- 11/10/2025 -->
+
+    <maven-site-plugin.version>3.21.0</maven-site-plugin.version> <!-- 22/10/2024 -->
+    <maven-project-info-reports-plugin.version>3.9.0</maven-project-info-reports-plugin.version> <!-- 26/02/2025 -->
+    <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version> <!-- 21/09/2025 -->
+    <maven-jxr-plugin.version>3.6.0</maven-jxr-plugin.version> <!-- 25/10/2024 -->
+    <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version> <!-- 11/10/2025 -->
+    <maven-surefire-report-plugin.version>3.5.4</maven-surefire-report-plugin.version> <!-- 10/09/2025 -->
+    <maven-pmd-plugin.version>3.28.0</maven-pmd-plugin.version>
+    <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version> <!-- 25/10/2024 -->
+
   </properties>
 
   <!-- Build Settings -->
@@ -45,12 +60,12 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.14.1</version>
+        <version>${maven-compiler-plugin.version}</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>3.4.2</version>
+        <version>${maven-jar-plugin.version}</version>
         <executions>
           <execution>
             <goals>
@@ -62,12 +77,12 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.5.4</version>
+        <version>${maven-surefire-plugin.version}</version>
       </plugin>
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.14</version>
+        <version>${jacoco-maven-plugin.version}</version>
         <executions>
           <execution>
             <goals>
@@ -83,40 +98,6 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <groupId>com.mycila</groupId>
-        <artifactId>license-maven-plugin</artifactId>
-        <version>5.0.0</version>
-        <configuration>
-          <mapping>
-            <java>JAVAPKG_STYLE</java>
-          </mapping>
-          <header>licence-header.txt</header>
-          <properties>
-            <projectName>impotch/util</projectName>
-          </properties>
-          <licenseSets>
-            <licenseSet>
-              <includes>
-                <include>src/**</include>
-              </includes>
-              <excludes>
-                <exclude>**/README</exclude>
-                <exclude>src/test/resources/**</exclude>
-                <exclude>src/main/resources/**</exclude>
-              </excludes>
-            </licenseSet>
-          </licenseSets>
-        </configuration>
-        <executions>
-          <!--execution> A reprendre si on a le temps
-            <phase>validate</phase>
-            <goals>
-              <goal>format</goal>
-            </goals>
-          </execution-->
-        </executions>
-      </plugin>
     </plugins>
   </build>
   <reporting>
@@ -124,31 +105,31 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
-        <version>3.21.0</version>
+        <version>${maven-site-plugin.version}</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-report-plugin</artifactId>
-        <version>3.5.4</version>
+        <version>${maven-surefire-report-plugin.version}</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>3.9.0</version>
+        <version>${maven-project-info-reports-plugin.version}</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.12.0</version>
+        <version>${maven-javadoc-plugin.version}</version>
         <configuration>
           <show>package</show>
           <charset>${project.build.sourceEncoding}</charset>
           <docfilessubdirs>true</docfilessubdirs>
           <links>
             <!-- JSE -->
-            <link>https://docs.oracle.com/en/java/javase/21/docs/api/</link>
+            <link>https://docs.oracle.com/en/java/javase/${maven.compiler.release}/docs/api/</link>
             <!-- Libraries -->
-            <link>https://docs.junit.org/current/api/</link>
+            <link>https://docs.junit.org/${junit.jupiter.version}/api/</link>
             <link>https://www.slf4j.org/apidocs/</link>
           </links>
         </configuration>
@@ -156,24 +137,12 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-pmd-plugin</artifactId>
-        <version>3.28.0</version>
-        <configuration>
-          <!--<linkXref>true</linkXref>-->
-          <minimumTokens>100</minimumTokens>
-          <targetJdk>${compileSource}</targetJdk>
-          <!--excludes>
-            <exclude>**/*Bean.java</exclude>
-            <exclude>**/generated/*.java</exclude>
-          </excludes>
-          <excludeRoots>
-            <excludeRoot>target/generated-sources/stubs</excludeRoot>
-          </excludeRoots-->
-        </configuration>
+        <version>${maven-pmd-plugin.version}</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.6.0</version>
+        <version>${maven-checkstyle-plugin.version}</version>
         <configuration>
           <configLocation>google_checks.xml</configLocation>
         </configuration>
@@ -181,12 +150,12 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jxr-plugin</artifactId>
-        <version>3.6.0</version>
+        <version>${maven-jxr-plugin.version}</version>
       </plugin>
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.14</version>
+        <version>${jacoco-maven-plugin.version}</version>
       </plugin>
     </plugins>
   </reporting>

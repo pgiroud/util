@@ -35,9 +35,19 @@ public enum TypeArrondi {
     DIX_MILLIEME_LE_PLUS_PROCHE(new BigDecimal("0.0001"), RoundingMode.HALF_UP, 4),
 
     /**
+     * Arrondi au 0,0001 c.-à-d. 1e-4 le plus proche.
+     */
+    DIX_MILLIEME_INFERIEUR(new BigDecimal("0.0001"), RoundingMode.DOWN, 4),
+
+    /**
      * Arrondi au 0,00001 c.-à-d. 1e-5 le plus proche.
      */
     CENT_MILLIEME_LE_PLUS_PROCHE(new BigDecimal("0.00001"), RoundingMode.HALF_UP, 5),
+
+    /**
+     * Arrondi au 0,00001 c.-à-d. 1e-5 le plus proche.
+     */
+    CENT_MILLIEME_INFERIEUR(new BigDecimal("0.00001"), RoundingMode.DOWN, 5),
 
     /**
      * Arrondi au dixième de centime le plus proche.
