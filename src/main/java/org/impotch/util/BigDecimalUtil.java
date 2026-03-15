@@ -1,5 +1,4 @@
-package org.impotch.util;
-/**
+/*
  * This file is part of impotch/util.
  * <p>
  * impotch/util is free software: you can redistribute it and/or modify
@@ -14,6 +13,8 @@ package org.impotch.util;
  * You should have received a copy of the GNU General Public License
  * along with impotch/util.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+package org.impotch.util;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -150,17 +151,9 @@ public final class BigDecimalUtil {
      *            Le nombre contenant les 0 superflus
      * @return Le même nombre sans les 0
      */
+    @Deprecated
     public static BigDecimal trim(BigDecimal pNombre) {
-        BigDecimal nombreTronque = pNombre;
-        try {
-            while (true) {
-                nombreTronque = nombreTronque.setScale(pNombre.scale() - 1);
-            }
-        } catch (ArithmeticException e) // NOPMD
-        {
-            // il n'existe plus d 0
-        }
-        return nombreTronque;
+        return pNombre.stripTrailingZeros();
     }
 
     /**

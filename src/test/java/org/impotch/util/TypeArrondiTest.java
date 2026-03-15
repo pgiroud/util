@@ -1,5 +1,4 @@
-package org.impotch.util;
-/**
+/*
  * This file is part of impotch/util.
  * <p>
  * impotch/util is free software: you can redistribute it and/or modify
@@ -14,6 +13,7 @@ package org.impotch.util;
  * You should have received a copy of the GNU General Public License
  * along with impotch/util.  If not, see <http://www.gnu.org/licenses/>.
  */
+package org.impotch.util;
 
 
 import java.math.BigDecimal;
@@ -27,80 +27,80 @@ public class TypeArrondiTest {
 
     @Test
     public void arrondirNull() {
-        assertThat(TypeArrondi.CINQ_CENTIEMES_LES_PLUS_PROCHES.arrondirMontant(null)).isNull();
+        assertThat(TypeArrondi.VINGTIEME_LE_PLUS_PROCHE.arrondir(null)).isNull();
     }
 
     @Test
     public void arrondiCinqCentimes() {
         // Arrondi de 0 au 5 centimes le plus proche
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_LES_PLUS_PROCHES, "0", "0.00");
+        testArrondi(TypeArrondi.VINGTIEME_LE_PLUS_PROCHE, "0", "0.00");
         // Arrondi de 0.0001253 au 5 centimes le plus proche
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_LES_PLUS_PROCHES, "0.0001253", "0.00");
+        testArrondi(TypeArrondi.VINGTIEME_LE_PLUS_PROCHE, "0.0001253", "0.00");
         // Arrondi de -0.01 au 5 centimes le plus proche
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_LES_PLUS_PROCHES, "-0.01", "0.00");
+        testArrondi(TypeArrondi.VINGTIEME_LE_PLUS_PROCHE, "-0.01", "0.00");
         // Arrondi de 0.25 au 5 centimes le plus proche
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_LES_PLUS_PROCHES, "0.25", "0.25");
+        testArrondi(TypeArrondi.VINGTIEME_LE_PLUS_PROCHE, "0.25", "0.25");
         // Arrondi de -0.25 au 5 centimes le plus proche
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_LES_PLUS_PROCHES, "-0.25", "-0.25");
+        testArrondi(TypeArrondi.VINGTIEME_LE_PLUS_PROCHE, "-0.25", "-0.25");
         // Arrondi de 1.0 au 5 centimes le plus proche
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_LES_PLUS_PROCHES, "1.0", "1.00");
+        testArrondi(TypeArrondi.VINGTIEME_LE_PLUS_PROCHE, "1.0", "1.00");
         // Arrondi de 1.24356 au 5 centimes le plus proche
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_LES_PLUS_PROCHES, "1.24356", "1.25");
+        testArrondi(TypeArrondi.VINGTIEME_LE_PLUS_PROCHE, "1.24356", "1.25");
         // Arrondi de -1.24356 au 5 centimes le plus proche
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_LES_PLUS_PROCHES, "-1.24356", "-1.25");
+        testArrondi(TypeArrondi.VINGTIEME_LE_PLUS_PROCHE, "-1.24356", "-1.25");
         // Arrondi de 2.5 au 5 centimes le plus proche
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_LES_PLUS_PROCHES, "2.5", "2.50");
+        testArrondi(TypeArrondi.VINGTIEME_LE_PLUS_PROCHE, "2.5", "2.50");
         // Arrondi de 10090 au 5 centimes le plus proche
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_LES_PLUS_PROCHES, "10090", "10090.00");
+        testArrondi(TypeArrondi.VINGTIEME_LE_PLUS_PROCHE, "10090", "10090.00");
         // Arrondi de 12875.243 au 5 centimes le plus proche
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_LES_PLUS_PROCHES, "12875.243", "12875.25");
+        testArrondi(TypeArrondi.VINGTIEME_LE_PLUS_PROCHE, "12875.243", "12875.25");
     }
 
     @Test
     public void arrondiCinqCentimesSuperieures() {
         // Arrondi de 0 au 5 centimes supérieur
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_SUP, "0", "0.00");
+        testArrondi(TypeArrondi.VINGTIEME_SUP, "0", "0.00");
         // Arrondi de 0.0001253 au 5 centimes supérieur
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_SUP, "0.0001253", "0.05");
+        testArrondi(TypeArrondi.VINGTIEME_SUP, "0.0001253", "0.05");
         // Arrondi de -0.0001253 au 5 centimes supérieur
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_SUP, "-0.0001253", "-0.05");
+        testArrondi(TypeArrondi.VINGTIEME_SUP, "-0.0001253", "-0.05");
         // Arrondi de 0.25 au 5 centimes supérieur
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_SUP, "0.25", "0.25");
+        testArrondi(TypeArrondi.VINGTIEME_SUP, "0.25", "0.25");
         // Arrondi de 1.0 au 5 centimes supérieur
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_SUP, "1.0", "1.00");
+        testArrondi(TypeArrondi.VINGTIEME_SUP, "1.0", "1.00");
         // Arrondi de 1.24356 au 5 centimes supérieur
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_SUP, "1.24356", "1.25");
+        testArrondi(TypeArrondi.VINGTIEME_SUP, "1.24356", "1.25");
         // Arrondi de 2.5 au 5 centimes supérieur
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_SUP, "2.5", "2.50");
+        testArrondi(TypeArrondi.VINGTIEME_SUP, "2.5", "2.50");
         // Arrondi de 10090 au 5 centimes supérieur
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_SUP, "10090", "10090.00");
+        testArrondi(TypeArrondi.VINGTIEME_SUP, "10090", "10090.00");
         // Arrondi de 12875.243 au 5 centimes supérieur
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_SUP, "12875.243", "12875.25");
+        testArrondi(TypeArrondi.VINGTIEME_SUP, "12875.243", "12875.25");
     }
 
 
     @Test
     public void arrondiCinqCentimesInferieures() {
         // Arrondi de 0 au 5 centimes inférieur
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_INF, "0", "0.00");
+        testArrondi(TypeArrondi.VINGTIEME_INF, "0", "0.00");
         // Arrondi de 0.0001253 au 5 centimes inférieur
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_INF, "0.0001253", "0.00");
+        testArrondi(TypeArrondi.VINGTIEME_INF, "0.0001253", "0.00");
         // Arrondi de -0.0001253 au 5 centimes inférieur
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_INF, "-0.0001253", "0.00");
+        testArrondi(TypeArrondi.VINGTIEME_INF, "-0.0001253", "0.00");
         // Arrondi de 0.25 au 5 centimes inférieur
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_INF, "0.25", "0.25");
+        testArrondi(TypeArrondi.VINGTIEME_INF, "0.25", "0.25");
         // Arrondi de 1.0 au 5 centimes inférieur
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_INF, "1.0", "1.00");
+        testArrondi(TypeArrondi.VINGTIEME_INF, "1.0", "1.00");
         // Arrondi de 1.24356 au 5 centimes inférieur
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_INF, "1.24356", "1.20");
+        testArrondi(TypeArrondi.VINGTIEME_INF, "1.24356", "1.20");
         // Arrondi de -1.24356 au 5 centimes inférieur
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_INF, "-1.24356", "-1.20");
+        testArrondi(TypeArrondi.VINGTIEME_INF, "-1.24356", "-1.20");
         // Arrondi de 2.5 au 5 centimes inférieur
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_INF, "2.5", "2.50");
+        testArrondi(TypeArrondi.VINGTIEME_INF, "2.5", "2.50");
         // Arrondi de 10090 au 5 centimes inférieur
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_INF, "10090", "10090.00");
+        testArrondi(TypeArrondi.VINGTIEME_INF, "10090", "10090.00");
         // Arrondi de 12875.243 au 5 centimes inférieur
-        testArrondi(TypeArrondi.CINQ_CENTIEMES_INF, "12875.243", "12875.20");
+        testArrondi(TypeArrondi.VINGTIEME_INF, "12875.243", "12875.20");
     }
 
     @Test

@@ -1,5 +1,4 @@
-package org.impotch.util;
-/**
+/*
  * This file is part of impotch/util.
  * <p>
  * impotch/util is free software: you can redistribute it and/or modify
@@ -14,6 +13,7 @@ package org.impotch.util;
  * You should have received a copy of the GNU General Public License
  * along with impotch/util.  If not, see <http://www.gnu.org/licenses/>.
  */
+package org.impotch.util;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -74,15 +74,13 @@ public enum TypeArrondi {
      * Arrondi aux cinq centimes inférieur. Par exemple, 2.28 sera
      * arrondi à 2.25
      */
-    CINQ_CENTIEMES_INF(BigDecimalUtil.CINQ_CENTIEMES, RoundingMode.DOWN, 2),
-
     VINGTIEME_INF(BigDecimalUtil.CINQ_CENTIEMES, RoundingMode.DOWN, 2),
 
     /**
      * Arrondi aux cinq centimes supérieurs. Par exemple, 2.28 sera arrondi
      * à 2.30
      */
-    CINQ_CENTIEMES_SUP(BigDecimalUtil.CINQ_CENTIEMES, RoundingMode.UP, 2),
+    VINGTIEME_SUP(BigDecimalUtil.CINQ_CENTIEMES, RoundingMode.UP, 2),
 
 
     /**
@@ -93,8 +91,6 @@ public enum TypeArrondi {
      *  <li>2.275 sera arrondi à 2.30</li>
      * </ul>
      */
-    CINQ_CENTIEMES_LES_PLUS_PROCHES(BigDecimalUtil.CINQ_CENTIEMES, RoundingMode.HALF_UP, 2),
-
     VINGTIEME_LE_PLUS_PROCHE(BigDecimalUtil.CINQ_CENTIEMES, RoundingMode.HALF_UP, 2),
 
     /**
@@ -248,19 +244,9 @@ public enum TypeArrondi {
      * Arrondi le montant fourni en paramètre. Attention, le type BigDecimal étant immuable,
      * une nouvelle instance de BigDecimal est retournée.
      * Si le montant à arrondir est négatif, on retourne la valeur absolue arrondie multipliée par -1.
-     * @param inoMontantAArrondir le montant à arrondir
-     * @return Une nouvelle instance de CsMontant : le montant arrondi.
+     * @param valeur la valeur à arrondir
+     * @return la valeur arrondie.
      */
-    @Deprecated
-    public BigDecimal arrondirMontant(BigDecimal inoMontantAArrondir) {
-        if (null == inoMontantAArrondir) {
-            return null;
-        }
-        BigDecimal montantAArrondirTranslate = inoMontantAArrondir.subtract(offset);
-        BigDecimal normalise = montantAArrondirTranslate.divide(precision, PRECISION_ARRONDI, mode);
-        return normalise.setScale(0, mode).multiply(precision).setScale(scale).add(offset);
-    }
-
     public BigDecimal arrondir(BigDecimal valeur) {
         if (null == valeur) {
             return null;
