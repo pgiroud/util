@@ -20,12 +20,10 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.impotch.util.BigDecimalUtil.trim;
-import static org.impotch.util.BigDecimalUtil.formatRight;
-
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.impotch.util.BigDecimalUtil.formatRight;
 
 public class BigDecimalUtilTest {
 
@@ -42,7 +40,17 @@ public class BigDecimalUtilTest {
     }
 
     @Test
-    public void trimDeux() {
-        assertThat(trim(new BigDecimal("2.00"))).isEqualTo(BigDecimal.TWO);
+    public void parseNombreAVirgule() {
+       assertThat(BigDecimalUtil.parse("3,14")).isEqualTo("3.14");
+    }
+
+    @Test
+    public void parseNombreSeparateurMillier() {
+       assertThat(BigDecimalUtil.parse("3 141")).isEqualTo("3141");	
+    }
+
+    @Test
+    public void parseNombreAVirguleEtSeparateurMillier() {
+       assertThat(BigDecimalUtil.parse("3 141,5927")).isEqualTo("3141.5927");		
     }
 }

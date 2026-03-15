@@ -18,8 +18,12 @@ package org.impotch.util;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.FieldPosition;
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 
 import static java.math.BigDecimal.ZERO;
 
@@ -29,6 +33,13 @@ public final class BigDecimalUtil {
     // ******* CHAMPS STATIQUES
     // *************************************************************
 
+    private static final ThreadLocal<DecimalFormat> chFRTreadSafeFormat = ThreadLocal.withInitial(
+			    () -> {
+				DecimalFormat nf = new DecimalFormat("", new DecimalFormatSymbols(Locale.of("fr","CH")));
+				nf.setParseBigDecimal(true);
+				return nf;
+			       });
+    
     // Ces choix sont arbitraires. 15 chiffres significatifs devraient être
     // suffisant dans la plupart des cas.
     // Pour le mode d'arrondi, on pourra trouver une justification dans
@@ -205,8 +216,17 @@ public final class BigDecimalUtil {
         return pPremierNombre.compareTo(pSecondNombre);
     }
 
+    private static BigDecimal from(String nbre) {
+	try {
+	    DecimalFormat fmt = chFRTreadSafeFormat.get();
+	    return (BigDecimal)fmt.parse(nbre);
+	} catch (ParseException pe) {
+	    return new BigDecimal(nbre);
+	}
+    }
+    
     /**
-     * Cette méthode retourne un taux à partir de sa représentation.
+     * Cette méthode retourne un taux ou un nombre à partir de sa représentation.
      * Dans la représentation sont supportés les taux en % et les taux en pour mille.
      * Ainsi l'appel de cette méthode avec comme paramètre "2.5 %" retournera le décimal 0.025
      * @param nombreOuTaux un nombre ou un taux sous forme de chaîne de caractère c.-à-d. un nombre, un nombre suivi d'un pour cent ou un nombre suivi d'un pour mille.
@@ -214,33 +234,20 @@ public final class BigDecimalUtil {
      * @throws NumberFormatException si la chaîne de caractère n'est pas un taux.
      */
     public static BigDecimal parse(String nombreOuTaux) {
-        return parseTaux(nombreOuTaux);
-    }
-
-    /**
-     * Cette méthode retourne un taux à partir de sa représentation.
-     * Dans la représentation sont supportés les taux en % et les taux en pour mille.
-     * Ainsi l'appel de cette méthode avec comme paramètre "2.5 %" retournera le décimal 0.025
-     * @param taux le taux sous forme de chaîne de caractère c.-à-d. un nombre, un nombre suivi d'un pour cent ou un nombre suivi d'un pour mille.
-     * @return le taux sous forme de nombre.
-     * @throws NumberFormatException si la chaîne de caractère n'est pas un taux.
-     * @deprecated Utiliser la méthode parse ou tx qui fait également le job
-     */
-    public static BigDecimal parseTaux(String taux) {
         int multiplicateur = 0;
-        String chaineDecimale = taux;
-        if (StringUtil.hasText(taux)) {
-            if (-1 < taux.indexOf(POUR_MILLE)) {
+        String chaineDecimale = nombreOuTaux;
+        if (StringUtil.hasText(nombreOuTaux)) {
+            if (-1 < nombreOuTaux.indexOf(POUR_MILLE)) {
                 multiplicateur = MULTIPLICATEUR_POUR_MILLE;
                 chaineDecimale = chaineDecimale.substring(0,
-                        taux.indexOf(POUR_MILLE)).trim();
-            } else if (-1 < taux.indexOf('%')) {
+                        nombreOuTaux.indexOf(POUR_MILLE)).trim();
+            } else if (-1 < nombreOuTaux.indexOf('%')) {
                 multiplicateur = MULTIPLICATEUR_POUR_CENT;
-                chaineDecimale = chaineDecimale.substring(0, taux.indexOf('%'))
+                chaineDecimale = chaineDecimale.substring(0, nombreOuTaux.indexOf('%'))
                         .trim();
             }
         }
-        BigDecimal tauxBD = new BigDecimal(chaineDecimale);
+        BigDecimal tauxBD = from(chaineDecimale);
         if (multiplicateur > 0) {
             tauxBD = tauxBD.movePointLeft(multiplicateur);
         }

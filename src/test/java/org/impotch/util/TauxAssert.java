@@ -1,5 +1,4 @@
-package org.impotch.util;
-/**
+/*
  * This file is part of impotch/util.
  * <p>
  * impotch/util is free software: you can redistribute it and/or modify
@@ -14,6 +13,9 @@ package org.impotch.util;
  * You should have received a copy of the GNU General Public License
  * along with impotch/util.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+package org.impotch.util;
+
 import java.math.BigDecimal;
 
 import org.assertj.core.api.AbstractAssert;
@@ -33,14 +35,14 @@ public class TauxAssert extends AbstractAssert<TauxAssert, BigDecimal> {
     }
 
     public TauxAssert tolerance(String ecartTauxTolere) {
-        tolerance = BigDecimalUtil.parseTaux(ecartTauxTolere);
+        tolerance = BigDecimalUtil.parse(ecartTauxTolere);
         return this;
     }
 
     public TauxAssert isEqualTo(String taux) {
         isNotNull();
 
-        BigDecimal tauxParse = BigDecimalUtil.parseTaux(taux);
+        BigDecimal tauxParse = BigDecimalUtil.parse(taux);
 
         String actualStr = actual.toPlainString();
         if (taux.contains("%")) {
@@ -67,7 +69,7 @@ public class TauxAssert extends AbstractAssert<TauxAssert, BigDecimal> {
     public TauxAssert isEqualByComparingTo(String taux) {
         isNotNull();
 
-        BigDecimal tauxParse = BigDecimalUtil.parseTaux(taux);
+        BigDecimal tauxParse = BigDecimalUtil.parse(taux);
 
         String actualStr = actual.toPlainString();
         if (taux.contains("%")) {
