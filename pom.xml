@@ -35,21 +35,23 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>25</maven.compiler.release>
-    <junit.jupiter.version>6.0.2</junit.jupiter.version>
-    <assertj.version>3.27.7</assertj.version>
+    <junit.jupiter.version>6.0.3</junit.jupiter.version> <!-- 15/02/2026 -->
+    <assertj.version>3.27.7</assertj.version> <!-- 24/01/2026 -->
 
-    <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
+    <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version> <!-- 01/02/2026 -->
+    <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version> <!-- 05/03/2026-->
     <maven-jar-plugin.version>3.5.0</maven-jar-plugin.version> <!-- 15/11/2025 -->
-    <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version> <!-- 10/09/2025 -->
+    <maven-source-plugin.version>3.4.0</maven-source-plugin.version> <!-- 29/11/2025 -->
+
+    <maven-surefire-plugin.version>3.5.5</maven-surefire-plugin.version> <!-- 21/02/2026 -->
     <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version> <!-- 11/10/2025 -->
 
     <maven-site-plugin.version>3.21.0</maven-site-plugin.version> <!-- 22/10/2024 -->
     <maven-project-info-reports-plugin.version>3.9.0</maven-project-info-reports-plugin.version> <!-- 26/02/2025 -->
     <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version> <!-- 21/09/2025 -->
     <maven-jxr-plugin.version>3.6.0</maven-jxr-plugin.version> <!-- 25/10/2024 -->
-    <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version> <!-- 11/10/2025 -->
-    <maven-surefire-report-plugin.version>3.5.4</maven-surefire-report-plugin.version> <!-- 10/09/2025 -->
-    <maven-pmd-plugin.version>3.28.0</maven-pmd-plugin.version>
+    <maven-surefire-report-plugin.version>3.5.5</maven-surefire-report-plugin.version> <!-- 18/02/2026 -->
+    <maven-pmd-plugin.version>3.28.0</maven-pmd-plugin.version> <!-- 07/10/2025 -->
     <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version> <!-- 25/10/2024 -->
 
   </properties>

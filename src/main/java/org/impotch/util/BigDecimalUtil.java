@@ -37,6 +37,7 @@ public final class BigDecimalUtil {
 			    () -> {
 				DecimalFormat nf = new DecimalFormat("", new DecimalFormatSymbols(Locale.of("fr","CH")));
 				nf.setParseBigDecimal(true);
+                nf.setStrict(true);
 				return nf;
 			       });
     

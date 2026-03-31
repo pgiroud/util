@@ -17,7 +17,10 @@
 package org.impotch.util;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Locale;
 
 import org.junit.jupiter.api.Test;
@@ -52,5 +55,24 @@ public class BigDecimalUtilTest {
     @Test
     public void parseNombreAVirguleEtSeparateurMillier() {
        assertThat(BigDecimalUtil.parse("3 141,5927")).isEqualTo("3141.5927");		
+    }
+
+    @Test
+    public void parseTaux() {
+        assertThat(BigDecimalUtil.parse("8.7 %")).isEqualTo("0.087");
+        assertThat(BigDecimalUtil.parse("1.4 %")).isEqualTo("0.014");
+        assertThat(BigDecimalUtil.parse("0.5 %")).isEqualTo("0.005");
+    }
+
+    @Test
+    public void decimalFmt() {
+        DecimalFormat nf = new DecimalFormat("", new DecimalFormatSymbols(Locale.of("fr","CH")));
+        nf.setParseBigDecimal(true);
+        nf.setStrict(true);
+        try {
+            assertThat((BigDecimal)nf.parse("8.7")).isEqualTo("8.7");
+        } catch (ParseException pe) {
+            System.out.println(pe.getMessage());
+        }
     }
 }
