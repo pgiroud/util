@@ -52,12 +52,30 @@
     <maven-jxr-plugin.version>3.6.0</maven-jxr-plugin.version> <!-- 25/10/2024 -->
     <maven-surefire-report-plugin.version>3.5.6</maven-surefire-report-plugin.version> <!-- 28/05/2026 -->
     <maven-pmd-plugin.version>3.28.0</maven-pmd-plugin.version> <!-- 07/10/2025 -->
+
+    <checkstyle.version>13.5.0</checkstyle.version> <!-- 31/05/2026 -->
     <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version> <!-- 25/10/2024 -->
 
   </properties>
 
   <!-- Build Settings -->
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>3.6.0</version>
+          <dependencies>
+            <dependency>
+              <groupId>com.puppycrawl.tools</groupId>
+              <artifactId>checkstyle</artifactId>
+              <version>${checkstyle.version}</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -146,7 +164,7 @@
         <artifactId>maven-checkstyle-plugin</artifactId>
         <version>${maven-checkstyle-plugin.version}</version>
         <configuration>
-          <configLocation>google_checks.xml</configLocation>
+          <configLocation>openjdk_checks.xml</configLocation>
         </configuration>
       </plugin>
       <plugin>
