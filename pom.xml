@@ -35,6 +35,8 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>25</maven.compiler.release>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
     <junit.jupiter.version>6.1.0</junit.jupiter.version> <!-- 20/05/2026 -->
     <assertj.version>3.27.7</assertj.version> <!-- 24/01/2026 -->
 
@@ -65,7 +67,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>3.6.0</version>
+          <version>${maven-checkstyle-plugin.version}</version>
           <dependencies>
             <dependency>
               <groupId>com.puppycrawl.tools</groupId>
@@ -182,6 +184,8 @@
 
   <!-- More Project Information -->
   <name>util</name>
+  <description>Quelques classes utilitaires permettant entre autres des arrondis.
+  </description>
   <url>https://github.com/pgiroud/util/wiki</url>
   <licenses>
     <license>

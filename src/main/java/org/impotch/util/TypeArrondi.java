@@ -50,41 +50,42 @@ public enum TypeArrondi {
     CENT_MILLIEME_INFERIEUR(new BigDecimal("0.00001"), RoundingMode.DOWN, 5),
 
     /**
-     * Arrondi au dixième de centime le plus proche.
+     * Arrondi au millième le plus proche.
      */
     MILLIEME_LE_PLUS_PROCHE(new BigDecimal("0.001"), RoundingMode.HALF_UP, 3),
 
     /**
-     * Arrondi au centime inférieur. Par exemple, 2.288 sera
+     * Arrondi au centième inférieur. Par exemple, 2.288 sera
      * arrondi à 2.28
      */
     CENTIEME_INF(BigDecimalUtil.UN_CENTIEME, RoundingMode.DOWN, 2),
 
     /**
-     * Arrondi au centime le plus proche.
+     * Arrondi au centième le plus proche.
      */
     CENTIEME_LE_PLUS_PROCHE(BigDecimalUtil.UN_CENTIEME, RoundingMode.HALF_UP, 2),
 
     /**
-     * Arrondi au centime supérieur.
+     * Arrondi au centième supérieur.
      */
     CENTIEME_SUP(BigDecimalUtil.UN_CENTIEME, RoundingMode.UP, 2),
 
     /**
-     * Arrondi aux cinq centimes inférieur. Par exemple, 2.28 sera
-     * arrondi à 2.25
+     * Arrondi au vingtième inférieur (équivalent à 5 centièmes). Par exemple, 2.28 sera
+     * arrondi à 2.25.
      */
     VINGTIEME_INF(BigDecimalUtil.CINQ_CENTIEMES, RoundingMode.DOWN, 2),
 
     /**
-     * Arrondi aux cinq centimes supérieurs. Par exemple, 2.28 sera arrondi
-     * à 2.30
+     * Arrondi au vingtième supérieur (équivalent à 5 centièmes). Par exemple, 2.28 sera arrondi
+     * à 2.30.
      */
     VINGTIEME_SUP(BigDecimalUtil.CINQ_CENTIEMES, RoundingMode.UP, 2),
 
 
     /**
-     * Arrondi aux cinq centimes les plus proches. Par exemple
+     * Arrondi au vintième le plus proche ce qui est équivalent à arrondi
+     * aux cinq centièmes les plus proches. Par exemple
      * <ul>
      *  <li>2.28 sera arrondi à 2.30</li>
      *  <li>2.27 sera arrondi à 2.25</li>
@@ -94,94 +95,101 @@ public enum TypeArrondi {
     VINGTIEME_LE_PLUS_PROCHE(BigDecimalUtil.CINQ_CENTIEMES, RoundingMode.HALF_UP, 2),
 
     /**
-     * Arrondi aux dix centimes inférieur
+     * Arrondi au dixième inférieur
      */
     DIXIEME_INF(BigDecimalUtil.UN_DIXIEME_AVEC_2_DECIMALES, RoundingMode.DOWN, 2),
 
 
     /**
-     * Arrondi aux dix centimes supérieurs
+     * Arrondi au dixième supérieur
      */
     DIXIEME_SUP(BigDecimalUtil.UN_DIXIEME_AVEC_2_DECIMALES, RoundingMode.UP, 2),
 
 
     /**
-     * Arrondi aux dix centimes les plus proches.
+     * Arrondi au dixième le plus proche.
      */
     DIXIEME_LE_PLUS_PROCHE(BigDecimalUtil.UN_DIXIEME_AVEC_2_DECIMALES, RoundingMode.HALF_UP, 2),
 
 
     /**
-     * Arrondi au franc inférieur.
+     * Arrondi à l’unité inférieure.
      */
     UNITE_INF(BigDecimalUtil.UN, RoundingMode.DOWN),
 
 
     /**
-     * Arrondi au franc supérieur.
+     * Arrondi à l’unité supérieure.
      */
     UNITE_SUP(BigDecimalUtil.UN, RoundingMode.UP),
 
 
     /**
-     * Arrondi au franc le plus proche
+     * Arrondi à l’unité la plus proche
      */
     UNITE_LA_PLUS_PROCHE(BigDecimalUtil.UN, RoundingMode.HALF_UP),
 
 
     /**
-     * Arrondi aux dix francs inférieurs
+     * Arrondi à la dizaine inférieure
      */
     DIZAINE_INF(BigDecimalUtil.DIX, RoundingMode.DOWN),
 
 
     /**
-     * Arrondi au dix francs supérieurs
+     * Arrondi à la dizaine supérieure
      */
     DIZAINE_SUP(BigDecimalUtil.DIX, RoundingMode.UP),
 
 
     /**
-     * Arrondi aux dix francs les plus proches.
+     * Arrondi à la dizaine la plus proche.
      */
     DIZAINE_LA_PLUS_PROCHE(BigDecimalUtil.DIX, RoundingMode.HALF_UP),
 
 
     /**
-     * Arrondi aux cents francs inférieurs
+     * Arrondi à la centaine inférieure
      */
     CENTAINE_INF(BigDecimalUtil.CENT, RoundingMode.DOWN),
 
 
     /**
-     * Arrondi aux cents francs supérieurs
+     * Arrondi à la centaine supérieure
      */
     CENTAINE_SUP(BigDecimalUtil.CENT, RoundingMode.UP),
 
 
     /**
-     * Arrondi aux cents francs les plus proches.
+     * Arrondi à la centaine la plus proche.
      */
     CENTAINE_LA_PLUS_PROCHE(BigDecimalUtil.CENT, RoundingMode.HALF_UP),
 
     /**
-     * Arrondi aux milles francs inférieurs
+     * Arrondi au millier inférieur
      */
     MILLE_INF(BigDecimalUtil.MILLE, RoundingMode.DOWN),
 
 
     /**
-     * Arrondi aux milles francs supérieurs
+     * Arrondi au millier supérieur
      */
     MILLE_SUP(BigDecimalUtil.MILLE, RoundingMode.UP),
 
 
     /**
-     * Arrondi aux milles francs les plus proches.
+     * Arrondi au millier le plus proche.
      */
     MILLE_LE_PLUS_PROCHE(BigDecimalUtil.MILLE, RoundingMode.HALF_UP),
 
 
+    ///
+    /// Arrondi utilisé par l’Administration Fédérale des Contributions dans les barèmes IFD de l’impôt à la source (barème à tranche constante)
+    /// * 3317 est arrondi à 3325
+    /// * 3303 est arrondi à 3325
+    /// * 3300 est arrondi à 3275
+    /// * 3299 est arrondi à 3275
+    ///
     CINQUANTE_UNITE_DECALE_VINGT_CINQ(BigDecimal.valueOf(50), RoundingMode.HALF_DOWN, 0, BigDecimal.valueOf(25));
 
     private static final int PRECISION_ARRONDI = 10;

@@ -34,13 +34,9 @@ public final class BigDecimalUtil {
     // *************************************************************
 
     private static final ThreadLocal<DecimalFormat> chFRTreadSafeFormat = ThreadLocal.withInitial(
-			    () -> {
-				DecimalFormat nf = new DecimalFormat("", new DecimalFormatSymbols(Locale.of("fr","CH")));
-				nf.setParseBigDecimal(true);
-                nf.setStrict(true);
-				return nf;
-			       });
-    
+            BigDecimalUtil::get);
+
+
     // Ces choix sont arbitraires. 15 chiffres significatifs devraient être
     // suffisant dans la plupart des cas.
     // Pour le mode d'arrondi, on pourra trouver une justification dans
@@ -288,5 +284,12 @@ public final class BigDecimalUtil {
 
 
     private BigDecimalUtil() {
+    }
+
+    private static DecimalFormat get() {
+        DecimalFormat nf = new DecimalFormat("", new DecimalFormatSymbols(Locale.of("fr", "CH")));
+        nf.setParseBigDecimal(true);
+        nf.setStrict(true);
+        return nf;
     }
 }
